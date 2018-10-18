@@ -1,0 +1,1 @@
+SELECT * from application_schema.clients;
