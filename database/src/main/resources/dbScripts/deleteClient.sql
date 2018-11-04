@@ -1,1 +1,0 @@
-DELETE FROM application_schema.clients WHERE id = ?;
