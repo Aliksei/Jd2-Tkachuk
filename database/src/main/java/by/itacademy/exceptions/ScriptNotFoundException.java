@@ -1,6 +1,6 @@
 package by.itacademy.exceptions;
 
-public class ScriptNotFoundException extends RuntimeException{
+public class ScriptNotFoundException extends RuntimeException {
 
     public ScriptNotFoundException(String message) {
         super(message);

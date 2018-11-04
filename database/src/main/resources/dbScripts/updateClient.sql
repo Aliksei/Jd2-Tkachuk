@@ -1,1 +1,0 @@
-UPDATE application_schema.clients SET first_name = ?  , second_name = ?,age = ? WHERE id = ?;

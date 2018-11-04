@@ -9,34 +9,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <p style="font-size: large"> Here you can make actions with users table in database</p>
-    <div>
-        <p>Getting user by id</p>
-    </div>
-
-    <div>
-        <p>Creating new user</p>
-    </div>
-
-    <div>
-        <p>Deleting user</p>
-    </div>
-
-    <div>
-        <p>Updating user</p>
-    </div>
+    <p style="font-size: large"> Here you can list of countries in database</p>
 </head>
 <body>
     <div>
-        <p>Here you can see current instance of clients table</p>
+        <p>Here you can see current instance of countries table</p>
     </div>
     <table style="width: 20%">
-        <c:forEach items="${clients}" var="client">
+        <c:forEach items="${countries}" var="country">
             <tr>
-                <td>${client.id}</td>
-                <td>${client.firstName}</td>
-                <td>${client.secondName}</td>
-                <td>${client.age}</td>
+                <td>${country.id}</td>
+                <td>${country.name}</td>
             </tr>
         </c:forEach>
     </table>
