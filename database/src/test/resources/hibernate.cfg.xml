@@ -14,13 +14,13 @@
     <property name="format_sql">true</property>
     <property name="hbm2ddl.auto">create-drop</property>
 
-      <mapping class="by.itacademy.enteties.role.Resident"/>
-      <mapping class="by.itacademy.enteties.role.User"/>
-      <mapping class="by.itacademy.enteties.role.Admin"/>
-      <mapping class="by.itacademy.enteties.hotel.Apartment"/>
-      <mapping class="by.itacademy.enteties.hotel.RentRequest"/>
-      <mapping class="by.itacademy.enteties.hotel.SpaRequest"/>
-      <mapping class="by.itacademy.enteties.catalog.City"/>
-      <mapping class="by.itacademy.enteties.catalog.Country"/>
+      <mapping class="com.itacademy.enteties.role.Resident"/>
+      <mapping class="com.itacademy.enteties.role.User"/>
+      <mapping class="com.itacademy.enteties.role.Admin"/>
+      <mapping class="com.itacademy.enteties.hotel.Apartment"/>
+      <mapping class="com.itacademy.enteties.hotel.RentRequest"/>
+      <mapping class="com.itacademy.enteties.hotel.SpaRequest"/>
+      <mapping class="com.itacademy.enteties.catalog.City"/>
+      <mapping class="com.itacademy.enteties.catalog.Country"/>
   </session-factory>
 </hibernate-configuration>
