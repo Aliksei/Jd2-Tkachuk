@@ -2,9 +2,10 @@ package com.itacademy.servlets;
 
 import com.itacademy.dto.ResidentDto;
 import com.itacademy.dto.ResidentFilterDto;
-import com.itacademy.enteties.enum_.Gender;
+import com.itacademy.database.entity.enum_.Gender;
 import com.itacademy.service.resident.ResidentService;
 import com.itacademy.service.resident.ResidentServiceImpl;
+import com.itacademy.spring.SpringContextLoader;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(value = "/residents", name = "Residents")
 public class ResidentServlet extends HttpServlet {
 
-    private final ResidentService residentService = ResidentServiceImpl.getInstance();
+    private final ResidentService residentService = (ResidentService) SpringContextLoader.getBean(ResidentServiceImpl.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

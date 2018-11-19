@@ -1,25 +1,32 @@
 package com.itacademy.service.resident;
 
-import com.itacademy.dao.resident.ResidentDao;
-import com.itacademy.dao.resident.ResidentDaoImpl;
+import com.itacademy.database.dao.resident.ResidentRepository;
 import com.itacademy.dto.ResidentDto;
 import com.itacademy.dto.ResidentFilterDto;
-import com.itacademy.enteties.hotel.Apartment;
-import com.itacademy.enteties.role.Resident;
+import com.itacademy.database.entity.hotel.Apartment;
+import com.itacademy.database.entity.role.Resident;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @NoArgsConstructor
+@Service
 public class ResidentServiceImpl implements ResidentService{
 
     private static final ResidentService INSTANCE = new ResidentServiceImpl();
 
-    private ResidentDao residentDao = ResidentDaoImpl.getInstance();
+    private ResidentRepository residentRepository;
+
+    @Autowired
+    public void setResidentRepository(ResidentRepository residentRepository) {
+        this.residentRepository = residentRepository;
+    }
 
     @Override
     public List<ResidentDto> getByFilter(ResidentFilterDto filter){
-        List<Resident> dao = residentDao.getByFilter(filter.getLimit(),
+        List<Resident> dao = residentRepository.getByFilter(filter.getLimit(),
                 filter.getOffset(), filter.getPredicates());
 
         List<ResidentDto> dto = new ArrayList<>();
@@ -30,8 +37,8 @@ public class ResidentServiceImpl implements ResidentService{
 
             ResidentDto residentDto = ResidentDto.builder()
                     .id(next.getId())
-                    .firstName(next.getFirst_name())
-                    .secondName(next.getSecond_name())
+                    .firstName(next.getFirstName())
+                    .secondName(next.getSecondName())
                     .city(next.getCity().getName())
                     .country(next.getCountry().getName())
                     .gender(next.getGender().toString())
@@ -50,7 +57,7 @@ public class ResidentServiceImpl implements ResidentService{
 
     @Override
     public Long getCount() {
-        return residentDao.getCount();
+        return residentRepository.count();
     }
 
     public static ResidentService getInstance() {

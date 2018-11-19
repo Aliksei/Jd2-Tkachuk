@@ -1,7 +1,7 @@
 package com.itacademy.dto;
 
-import com.itacademy.enteties.enum_.Gender;
-import com.itacademy.enteties.role.QResident;
+import com.itacademy.database.entity.enum_.Gender;
+import com.itacademy.database.entity.role.QResident;
 import com.querydsl.core.types.Predicate;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +31,12 @@ public class ResidentFilterDto {
     }
 
     public void setFirstNamePredicate(String firstName){
-        firstNamePredicate = resident.first_name.eq(firstName);
+        firstNamePredicate = resident.firstName.eq(firstName);
         predicates.add(firstNamePredicate);
     }
 
     public void setSecondNamePredicate(String secondName){
-        secondNamePredicate = resident.second_name.eq(secondName);
+        secondNamePredicate = resident.secondName.eq(secondName);
         predicates.add(secondNamePredicate);
     }
 
