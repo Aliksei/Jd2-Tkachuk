@@ -12,5 +12,4 @@ public interface RentRequestRepository extends CrudRepository<RentRequest, Long>
 
     Optional<RentRequest> findByResidentId(Long residentId);
 
-
 }

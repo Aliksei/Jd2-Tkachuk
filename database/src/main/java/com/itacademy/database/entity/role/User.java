@@ -28,7 +28,6 @@ public abstract class User extends BaseEntity<Long> {
     @Embedded
     private Credentials credentials;
 
-
     @Column(name = "first_Name", nullable = false)
     private String firstName;
 

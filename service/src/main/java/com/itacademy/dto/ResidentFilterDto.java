@@ -11,38 +11,64 @@ import lombok.NoArgsConstructor;
 public class ResidentFilterDto {
 
     private QResident resident = QResident.resident;
-    private Predicate firstNamePredicate;
-    private Predicate secondNamePredicate;
-    private Predicate genderPredicate;
+    private String firstName;
+    private String secondName;
+    private String gender;
     private Integer offset;
     private Integer limit;
-    private List<Predicate> predicates = new ArrayList<>();
 
-    public Predicate getFirstNamePredicate() {
-        return firstNamePredicate;
+    public void setLimit(Integer limit) {
+        if (limit != null && limit > 0){
+            this.limit = limit;
+        }else {
+            this.limit = 100;
+        }
     }
 
-    public Predicate getSecondNamePredicate() {
-        return secondNamePredicate;
+    public void setOffset(Integer offset) {
+        if (offset != null && offset > 0){
+            this.offset = offset;
+        }else {
+            this.offset = 0;
+        }
     }
 
-    public Predicate getGenderPredicate() {
-        return genderPredicate;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setFirstNamePredicate(String firstName){
-        firstNamePredicate = resident.firstName.eq(firstName);
-        predicates.add(firstNamePredicate);
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
-    public void setSecondNamePredicate(String secondName){
-        secondNamePredicate = resident.secondName.eq(secondName);
-        predicates.add(secondNamePredicate);
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public void setGenderPredicate(Gender gender){
-        genderPredicate = resident.gender.eq(gender);
-        predicates.add(genderPredicate);
+    public Predicate[] getPredicates() {
+        List<Predicate> pr = new ArrayList<>();
+        if (firstName != null && !firstName.isEmpty()) {
+            pr.add(resident.firstName.eq(firstName));
+        }
+        if (secondName != null && !secondName.isEmpty()) {
+            pr.add(resident.secondName.eq(secondName));
+        }
+        if (gender != null && !gender.isEmpty()) {
+            pr.add(resident.gender.eq(Gender.valueOf(gender)));
+        }
+        return pr.toArray(new Predicate[]{});
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public String getGender() {
+        return gender;
     }
 
     public Integer getOffset() {
@@ -53,15 +79,4 @@ public class ResidentFilterDto {
         return limit;
     }
 
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
-    public Predicate[] getPredicates() {
-        return predicates.toArray(new Predicate[]{});
-    }
 }

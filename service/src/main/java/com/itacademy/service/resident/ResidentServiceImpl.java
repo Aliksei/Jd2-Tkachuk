@@ -7,22 +7,16 @@ import com.itacademy.database.entity.hotel.Apartment;
 import com.itacademy.database.entity.role.Resident;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@NoArgsConstructor
 @Service
+@Transactional
 public class ResidentServiceImpl implements ResidentService{
 
-    private static final ResidentService INSTANCE = new ResidentServiceImpl();
-
-    private ResidentRepository residentRepository;
-
     @Autowired
-    public void setResidentRepository(ResidentRepository residentRepository) {
-        this.residentRepository = residentRepository;
-    }
+    private ResidentRepository residentRepository;
 
     @Override
     public List<ResidentDto> getByFilter(ResidentFilterDto filter){
@@ -60,7 +54,4 @@ public class ResidentServiceImpl implements ResidentService{
         return residentRepository.count();
     }
 
-    public static ResidentService getInstance() {
-        return INSTANCE;
-    }
 }

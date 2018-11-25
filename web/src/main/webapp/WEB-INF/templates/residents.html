@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Residents filter</h1>
+<span>
+    <form action="#" th:action="@{/logout}"  method="POST">
+            <button type="submit" class="btn btn-default">Log out</button>
+    </form>
+</span>
+
+<div class="container">
+    <form action="#" th:action="@{/residents}" th:object="${filter}" method="POST" style="width: 50%">
+        <input type="hidden" th:name="currentPage" value="1">
+        <div>
+            <div class="form-group">
+                <label for="fName">FirstName:</label>
+                <input type="text" class="form-control" id="fName" placeholder="FirstName" th:field="*{firstName}">
+            </div>
+            <div class="form-group">
+                <label for="fSecond">SecondName:</label>
+                <input type="text" class="form-control" id="fSecond" placeholder="SecondName" th:field="*{secondName}">
+            </div>
+            <div class="form-group">
+                <label for="gen">Gender:</label>
+                <input type="text" class="form-control" id="gen" th:field="*{gender}">
+            </div>
+            <div class="form-group">
+                <label for="lim">Limit:</label>
+                <input type="number" class="form-control" placeholder="default 100" id="lim" th:field="*{limit}">
+            </div>
+            <div class="form-group">
+                <label for="offs">Offset:</label>
+                <input type="number" class="form-control" placeholder="default 0" id="offs" th:field="*{offset}">
+            </div>
+            <div class="form-group">
+                <label for="records">Results on page:</label>
+                <input type="number" class="form-control" placeholder="default 25" id="records" th:name="recordsPerPage" th:value="${recordsPerPage}">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </div>
+    </form>
+</div>
+
+<div th:if="${residents != null && residents.size() > 0}" class="container">
+    <table class="table table-bordered" style="width: 50%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>SecondName</th>
+                <th>Gender</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="resident : ${residents}">
+                <td th:text="${resident.getId()}"></td>
+                <td th:text="${resident.getFirstName()}"></td>
+                <td th:text="${resident.getSecondName()}"></td>
+                <td th:text="${resident.getGender()}"></td>
+                <td th:text="${resident.getCity()}"></td>
+                <td th:text="${resident.getCountry()}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <nav>
+        <ul>
+            <th:block th:each="i: ${#numbers.sequence(1, noOfPages)}">
+                <li th:if="${currentPage == i}">Current page</li>
+                <form th:unless="${currentPage == i}" action="#" th:action="@{/residents}" th:object="${filter}"
+                      method="POST">
+                    <input type="hidden" th:name="currentPage" th:value="${i}">
+                    <input type="hidden" th:field="*{firstName}"/>
+                    <input type="hidden" th:field="*{secondName}"/>
+                    <input type="hidden" th:field="*{gender}"/>
+                    <input type="hidden" th:field="*{limit}"/>
+                    <input type="hidden" th:field="*{offset}"/>
+                    <input type="hidden" th:name="recordsPerPage" th:value="${recordsPerPage}"/>
+                    <button type="submit" th:text="${i}"></button>
+                    <span>page</span>
+                </form>
+            </th:block>
+        </ul>
+    </nav>
+</div>
+
+</body>
+</html>
