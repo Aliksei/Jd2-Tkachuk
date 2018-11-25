@@ -34,7 +34,7 @@ public class ResidentController {
                          @RequestParam("recordsPerPage") Integer recordsPerPage,
                          Model model) {
         List<ResidentDto> residents = residentService.getByFilter(filter);
-        if (recordsPerPage == null){
+        if (recordsPerPage == null) {
             recordsPerPage = 25;
         }
         int start = (currentPage - 1) * recordsPerPage;
